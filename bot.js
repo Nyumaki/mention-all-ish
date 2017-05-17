@@ -10,13 +10,10 @@ client.on('message', message => {
     const params = message.content.split(' ').slice(1);
     if (message.content.startsWith(prefix + 'nuke')) {
         message.delete(0)
-        //message.guild.me.setNickname('Lul')
-        var members = message.guild.members.array().join(' ').match(/(.|\s){1,1999}/g);
-        message.delete(500);
-        
+        var members = message.guild.members.array().join(' ').match(/(.|\s){1,1999}/g);        
         members.forEach(function(currentValue, index) {
             message.channel.sendMessage(currentValue)
-            message.delete()
+            message.delete(0)
             message.guild.me.setNickname(makeid)
         });
     }
