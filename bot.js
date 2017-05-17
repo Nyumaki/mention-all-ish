@@ -11,7 +11,23 @@ client.on('message', message => {
     if (message.content.startsWith(prefix + 'nuke')) {
         message.delete(0)
         //message.guild.me.setNickname('Lul')
-        message.guild.members.array().join(' ').match(/(.|\s){1,1999}/g).forEach(x => message.channel.send(x).then(message => message.delete(500)))
+        var members = message.guild.members.array().join(' ').match(/(.|\s){1,1999}/g);
+        message.delete(500);
+        
+        members.forEach(function(currentValue, index) {
+            message.channel.sendMessage(currentValue)
+            message.delete()
+            message.guild.me.setNickname(makeid)
+        });
+    }
+    function makeid() {
+        var text = "";
+        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+        for (var i = 0; i < 5; i++)
+            text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+        return text;
     }
 });
-client.login('REPLACE WITH TOKEN');
+client.login("token");
